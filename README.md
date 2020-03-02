@@ -20,7 +20,7 @@ At the end of the designing process, the result was the following gaming environ
 
 **Roll-A-Ball**
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg)
+![Roll-A-Ball gameplay image](https://i.ibb.co/dkxmYY6/image.png)
 
 The rules are pretty simple. The game is played by two players, represented by two spheres. It is set on a board surrounded by walls, upon which we find a collection of objects. These objects are positioned randomly, so that every match is different from another, and represent two different kinds of items the player can interact and collide with.
 
@@ -34,7 +34,7 @@ o **RBS: Design**
 
 In this version of the game one of the players is controlled by an Artificial Intelligence, structured roughly as described in the following picture.    
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image004.png)
+![FSM RBS](https://i.ibb.co/hYRsPG8/Immagine.png)
 
 The AI is fundamentally relying on a Rule Based System, so its behaviour is deterministic. It has a starting state named "Idle", from which the AI processes all the information in the database, before taking action.
 
@@ -66,7 +66,7 @@ o **ML-Agent: Design**
 
 Prior to designing the ML-Agent more documentation needed to be read first, as while there was a beforehand knowledge of the concepts behind Reinforcement Learning, what was missing was the knowledge regarding how to implement this technique in Unity. Luckily, the Unity SDK for ML-Agents has been really helpful. Thanks to this amazing toolkit, creating a learning environment for the ML-Agent revealed itself to be far easier than expected. The focus shifted mostly on reward systems, and how to tune in the hyperparameters, which is more a concern for the implementation process and will be discussed later.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image006.jpg)
+![ML-Agent RL](https://i.ibb.co/K6D9Y9y/Immagine.png)
 
 The agent's learning system is quite simple: on every step it takes an action, and collects observation, while increasing or decreasing the reward. At the end of the episode the AI collects the reward, which represents the end result of all the actions that have been taken during the episode, taking into account all the observation data that has been collected.
 
@@ -94,11 +94,11 @@ o **ML-Agent: Implementation**
 
 This part can be really tough, although setting up the environment is actually easy thanks to the Unity SDK for ML-Agents, as has been mentioned before. Once everything is set up, running the code may not immediately produce the expected results. In fact, within the first few hours the ML-Agent did not seem to be learning much, as can be seen from the screenshot below.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image008.jpg)
+![](https://i.ibb.co/wLjSkBS/Immagine.png)
 
 Considering that the reward ranges from a minimum of -0.25 to a maximum of 1, it could be said that the ML-Agent's first training session wasn't exactly successful. After reading a bit more into the documentation, realization came: what actually happened was an issue with tuning the hyperparameters.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image010.jpg)Hyperparameters are basically a set of values inside a configuration .yaml file that is used to control the learning process of the ML-Agent.
+![](https://i.ibb.co/nRgnVTc/Immagine.png)Hyperparameters are basically a set of values inside a configuration .yaml file that is used to control the learning process of the ML-Agent.
 
 In the case at hand, such values were the ones shown in the picture beside.
 
@@ -140,7 +140,7 @@ In order to understand what has changed and how it did improve the learning envi
 
 § **Summary Frequency**: It is used to decide how often, in steps, we want to save training statistics. This determines the number of data points shown by TensorBoard.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image012.jpg)Playing around with the hyperparameters is not a simple task, and although one might wish this to be the last obstacle into building a functioning learning environment, there are more things that one has to keep in mind in order to get the most out of what reinforcement learning has to offer.
+![](https://i.ibb.co/0j6RrpQ/Immagine.png)Playing around with the hyperparameters is not a simple task, and although one might wish this to be the last obstacle into building a functioning learning environment, there are more things that one has to keep in mind in order to get the most out of what reinforcement learning has to offer.
 
 Among the notions that have been gathered during this process there are some little tweaks that improve the learning rate.
 
@@ -168,31 +168,31 @@ To monitor this we need to use TensorBoard, an application based on TensorFlow t
 
 The general trend in reward should consistently increase over time. Small ups and downs are to be expected. Depending on the complexity of the task, a significant increase in reward may not present itself until millions of steps into the training process. As can be seen, the ML-Agent for Roll-A-Ball started to display significant increases only after 2 million steps.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image014.png)
+![](https://i.ibb.co/z66WLYC/Immagine.png)
 
 § **Episode Length**
 
 Although it is strictly related to the kind of training environment we're using, episode length is another useful way of controlling if there are significant changes in the Agent's expected behaviour. Since the episodes length is supposed to be decreasing over time (as the Agent learns how to collect the items on the board), this information is particularly useful in this case.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image016.jpg)
+![](https://i.ibb.co/6XPsxRs/Immagine.png)
 
 § **Policy Loss**
 
 These values will oscillate during training. Generally they should be less than 1.0.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image018.jpg)
+![](https://i.ibb.co/jJcZN2F/Immagine.png)
 
 § **Value Estimate**
 
 These values should increase as the cumulative reward increases. They correspond to how much future reward the agent predicts itself receiving at any given point.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image020.jpg)
+![](https://i.ibb.co/b6H99KM/Immagine.png)
 
 § **Value Loss**
 
 These values will increase as the reward increases, and then should decrease once reward becomes stable. As can be seen in the following picture, the training curve tends to increase slowly, but surely.
 
-![](file:///C:/Users/Ridam/AppData/Local/Temp/msohtmlclip1/01/clip_image022.jpg)
+![](https://i.ibb.co/MDJGx43/Immagine.png)
 
 **Conclusions**
 
